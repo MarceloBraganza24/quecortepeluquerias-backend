@@ -33,6 +33,9 @@ const partnersSchema = new mongoose.Schema({
         ],
         default: []
     },
+    points: {
+        type: String
+    },
     partner_datetime: {
         type: String,
         required: true

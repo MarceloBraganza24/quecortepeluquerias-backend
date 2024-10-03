@@ -43,7 +43,7 @@ const register = async(partner) => {
 
 const payRegister = async(partner) => {
     const partners = await partnersManager.getAll();
-    const partnerByEmailExists = partners.find(item => item.email === partner.email);
+    const partnerByEmailExists = partners.find(item => item.email == partner.email);
     if(partnerByEmailExists) {
         throw new PartnerByEmailExists('There is already a partner with that email');
     }
@@ -62,10 +62,10 @@ const update = async (id, partner) => {
     const partners = await partnersManager.getAll();
     const partnerById = await partnersManager.getById(id);
     const partnerByEmailExists = partners.find(item => item.email == partner.email);
-    if(partnerById.first_name == partner.first_name && partnerById.last_name == partner.last_name && partnerById.partner_number == partner.partner_number && partnerById.email == partner.email) {
+    if(partnerById.first_name == partner.first_name && partnerById.last_name == partner.last_name && partnerById.partner_number == partner.partner_number && partnerById.email == partner.email && partnerById.points == partner.points) {
         throw new PartnerExists('There is already a partner with that data');
     }
-    if(partnerById.first_name !== partner.first_name || partnerById.last_name !== partner.last_name || partnerById.partner_number != partner.partner_number || partnerById.email != partner.email) {
+    if(partnerById.first_name != partner.first_name || partnerById.last_name != partner.last_name || partnerById.partner_number != partner.partner_number || partnerById.email != partner.email || partnerById.points != partner.points) {
         if(partnerByEmailExists && (partnerByEmailExists._id.toString() !== partnerById._id.toString())) {
             throw new PartnerByEmailMembershipNumberExists('There is already a partner with that email or membership number');
         }
